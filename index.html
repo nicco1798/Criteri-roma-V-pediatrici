@@ -8,15 +8,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500&display=swap');
 
 :root {
-  --bg: #0f0f0f;
-  --surface: #181818;
-  --surface2: #222222;
+  --bg: #fffdf2;
+  --surface: #A8D5E3;
+  --surface2: #FF78AC;
   --border: #2e2e2e;
-  --text: #f0ede8;
+  --text: #312208df;
   --muted: #888;
-  --accent: #c8f55a;
+  --accent: #f5905a;
   --accent-dim: rgba(200,245,90,0.12);
-  --red: #ff5c5c;
+  --red: #ef4646;
   --red-dim: rgba(255,92,92,0.12);
   --blue: #5ca8ff;
   --blue-dim: rgba(92,168,255,0.1);
@@ -24,6 +24,7 @@
   --gold-dim: rgba(245,200,74,0.1);
   --green: #4af5a0;
   --green-dim: rgba(74,245,160,0.1);
+  --terracotta: #B96F62;
   --r: 8px;
 }
 
@@ -33,7 +34,7 @@ body {
   font-family: 'Instrument Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
+  min-height: 1;
   display: flex;
   flex-direction: column;
 }
@@ -255,13 +256,13 @@ body {
 .alarm-result strong { font-weight: 600; display: block; margin-bottom: 4px; }
 
 .btn-secondary {
-  background: var(--surface2);
+  background: var(--terracotta);
   color: var(--text);
   border: 1px solid var(--border);
   padding: 14px 24px;
   border-radius: var(--r);
   font-family: 'Syne', sans-serif;
-  font-weight: 600;
+  font-weight: ;
   font-size: 0.9rem;
   cursor: pointer;
   width: 100%;
@@ -401,9 +402,9 @@ body {
 }
 
 .btn-deep {
-  background: var(--surface2);
+  background: var(--accent);
   border: 1px solid var(--accent);
-  color: var(--accent);
+  color: var(--bg);
   padding: 14px 18px;
   border-radius: var(--r);
   font-family: 'Syne', sans-serif;
@@ -416,9 +417,9 @@ body {
   justify-content: space-between;
   transition: all 0.15s;
 }
-.btn-deep:hover { background: var(--accent-dim); }
-.btn-deep-arrow { transition: transform 0.2s; }
-.btn-deep.open .btn-deep-arrow { transform: rotate(180deg); }
+.btn-deep:hover { filter: brightness(0.95); }
+.btn-deep-arrow { transition: transform 0.2s; color: var(--bg); }
+.btn-deep.open .btn-deep-arrow { transform: rotate(180deg); color: var(--bg); }
 
 /* TABS */
 .detail-drawer {
@@ -594,14 +595,14 @@ body {
   ══════════════════════════════════════════════ -->
   <div class="screen active" id="screen-welcome">
     <div class="welcome-title">Diagnosi<br><em>DGBI</em><br>Pediatrica</div>
-    <div class="welcome-sub">Strumento decisionale basato sui criteri <strong>Roma V 2026</strong> per disturbi di gut-brain interaction in bambini e adolescenti.</div>
+    <div class="welcome-sub">Strumento decisionale basato sui criteri delle principali <strong>linee guida internazionali</strong> per disturbi di gut-brain interaction in bambini e adolescenti..</div>
     <div class="welcome-features">
       <div class="feature-row"><div class="feature-dot"></div>Disturbi GI superiori e inferiori con flowchart navigabile</div>
       <div class="feature-row"><div class="feature-dot"></div>Red flag check integrato prima della diagnosi</div>
       <div class="feature-row"><div class="feature-dot"></div>Schede complete alla diagnosi: criteri · esami · terapia</div>
     </div>
     <button class="btn-primary" onclick="startAlarm()">Inizia valutazione →</button>
-    <div class="disclaimer">⚕ Strumento di supporto clinico. Non sostituisce il giudizio medico. Basato su Roma V — Gastroenterology 2026.</div>
+    <div class="disclaimer">⚕ Strumento di supporto clinico. Non sostituisce il giudizio medico. Basato su linee guida internazionali (ESPGHAN, NASPGHAN, SIGENP) e i Criteri di Roma V</div>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -731,22 +732,23 @@ const DIAGNOSES = {
         </div>`,
       "Terapia": `
         <div class="therapy-block">
-          <div class="therapy-label">Prima linea — non farmacologico</div>
-          <div class="therapy-item">Ipnoterapia (RCT; benefici fino a 5 anni follow-up)</div>
-          <div class="therapy-item">CBT — Cognitive Behavioral Therapy (RCT; fino a 1 anno)</div>
+          <div class="therapy-label">Prima linea</div>
+          <div class="therapy-item">Ipnoterapia (evidenzia piu solida)</div>
+          <div class="therapy-item">terapia cognitivo-comportamentale</div>
           <div class="therapy-item">PENFS — Stimolazione nervosa percutanea (FDA approvato 11-18 anni)</div>
+          <div class="therapy-item">Analgesici da banco per dolore acuto: Paracetamolo e ibuprofene( attenzione a dosaggio e durata terapia)</div>
         </div>
         <div class="therapy-block">
-          <div class="therapy-label">Dieta</div>
-          <div class="therapy-item">Low-FODMAP (3 fasi; max 4-6 sett restrizione) — sempre con dietista</div>
-          <div class="therapy-item">Psyllium (fibre solubili) · Olio menta piperina enteric-coated</div>
-          <div class="therapy-item">Probiotici: Lactobacillus rhamnosus GG</div>
+          <div class="therapy-label">Dieta( attenzione a fattori di rischio per disturbi alimentari) </div>
+          <div class="therapy-item">Low-FODMAP (max 4-6 sett restrizione) — sempre con dietista</div>
+          <div class="therapy-item">Psyllium (fibre solubili) · Capsule di  olio menta piperina gastroresistenti</div>
+          <div class="therapy-item">Simbiotici e Probiotici: Lactobacillus rhamnosus GG</div>
         </div>
         <div class="therapy-block">
           <div class="therapy-label">Farmacologico (per sottotipo)</div>
-          <div class="therapy-item">IBS-C: PEG, lassativi stimolanti, linaclotide (FDA 6-17 aa, 72 mcg/die)</div>
-          <div class="therapy-item">IBS-D: loperamide, sequestranti acidi biliari</div>
-          <div class="therapy-item">Ciproeptadina · amitriptilina (casi selezionati)</div>
+          <div class="therapy-item">IBS-C: PEG, se refrattari su indicazione specialistica:  lassativi stimolanti, linaclotide (FDA 6-17 aa)</div>
+          <div class="therapy-item">IBS-D: loperamide, sequestranti acidi biliari( in casi selezionati)</div>
+          <div class="therapy-item">Su indicazione specialistica: Ciproeptadina · Amitriptilina (casi selezionati)</div>
         </div>`
     }
   },
@@ -834,29 +836,29 @@ const DIAGNOSES = {
       "Criteri": `
         <div class="tab-section-title">Criteri — tutti obbligatori (≥2 episodi in 6 mesi)</div>
         <div class="info-list">
-          <div class="info-item"><div class="info-item-dot dot-blue"></div>Dolore periombelicale/mediano/diffuso intenso, durata ≥1 ora, <strong>sintomo più grave e disturbante</strong></div>
+          <div class="info-item"><div class="info-item-dot dot-blue"></div>Dolore periombelicale/mediano/diffuso intenso, durata ≥1 ora</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Episodi separati da almeno 1 settimana</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Dolore invalida le attività normali</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Pattern stereotipato nel singolo paziente</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Associato ad almeno <strong>2</strong> tra: anoressia, nausea, vomito, cefalea, fotofobia, pallore</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Non spiegabile da altra condizione, inclusa CVS</div>
         </div>
-        <div class="highlight-box info">ℹ Se sintomi sovrapposti con CVS: il sintomo predominante e più disturbante guida la diagnosi primaria</div>`,
+        <div class="highlight-box info">ℹ Se sintomi sovrapposti con sindrome vomito ciclico: il sintomo predominante e più disturbante guida la diagnosi primaria</div>`,
       "Esami": `
         <div style="display:flex;flex-direction:column;gap:6px">
           <div class="exam-item">Emocromo, elettroliti, glicemia, funzionalità renale ed epatica, amilasi/lipasi, urinocoltura</div>
-          <div class="exam-item">Valutazione psicologica</div>
-          <div class="exam-item">Escludere: pancreatite ricorrente, torsione ovarica, porfirie, angioedema ereditario, FMF</div>
+          <div class="exam-item">Eventuale presa in carico psicologica o NPI</div>
+          <div class="exam-item">Considerare diagnosi differenziale: pancreatite ricorrente, torsione ovarica, porfirie, angioedema ereditario, FMF</div>
         </div>`,
       "Terapia": `
         <div class="therapy-block">
           <div class="therapy-label">Profilassi (episodi frequenti/invalidanti)</div>
-          <div class="therapy-item">Pizotifene · ciproeptadina · propranololo · flunarizina</div>
+          <div class="therapy-item">Su indicazione specialistica: Pizotifene · ciproeptadina · propranololo · flunarizina</div>
         </div>
         <div class="therapy-block">
           <div class="therapy-label">Trattamento acuto dell'episodio</div>
-          <div class="therapy-item">Analgesici · riposo · sonno</div>
-          <div class="therapy-item">Pizotifene · sumatriptan · verapamil · topiramato · aprepitant · divalproex sodico</div>
+          <div class="therapy-item">Analgesici come paracetamolo o ibuprofene · riposo · favorire il sonno</div>
+          <div class="therapy-item">Su indicazione specialistica: Pizotifene · sumatriptan · verapamil · topiramato · aprepitant · divalproex sodico</div>
           <div class="therapy-item">Casi refrattari: diidroergotamina IV</div>
         </div>`
     }
@@ -868,7 +870,7 @@ const DIAGNOSES = {
     summary: "Dolore addominale CONTINUO che limita il funzionamento quotidiano (scuola, sport, vita sociale/familiare). Tipicamente associato a comorbidità psicosociali.",
     tabs: {
       "Criteri": `
-        <div class="highlight-box danger">⚠ CAPS = dolore CONTINUO (non intermittente). Se intermittente → APS-NOS</div>
+        <div class="highlight-box danger">⚠ CAPS = dolore CONTINUO (non intermittente). Se fosse con caratteristiche intermittente; possibile APS-NOS</div>
         <div class="tab-section-title" style="margin-top:14px">Criteri — tutti obbligatori (≥2 mesi)</div>
         <div class="info-list">
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Dolore addominale <strong>continuo</strong></div>
@@ -883,16 +885,16 @@ const DIAGNOSES = {
         </div>`,
       "Terapia": `
         <div class="therapy-block">
-          <div class="therapy-label">Cura multidisciplinare (altamente raccomandata)</div>
-          <div class="therapy-item">Brain-gut therapies: CBT · ipnosi · PENFS</div>
-          <div class="therapy-item">Collaborazione con famiglia e scuola</div>
-          <div class="therapy-item">Centri specializzati per dolore cronico</div>
+          <div class="therapy-label">indicazioni </div>
+          <div class="therapy-item">Invio presso Centro specializzato per presa in carico multidisciplinare</div>
+          <div class="therapy-item">Brain-gut therapies: terapia cognitivo-comportamentale · ipnosi · PENFS</div>
+          <div class="therapy-item">Collaborazione con famiglia e scuola per la gestione del paziente con dolore</div>
         </div>
         <div class="therapy-block">
-          <div class="therapy-label">Farmacologico</div>
+          <div class="therapy-label">Farmacologico(a disposizione dello specialista)</div>
           <div class="therapy-item">TCA: amitriptilina, nortriptilina</div>
           <div class="therapy-item">SSRI: citalopram · Antidepressivi quaternari: mirtazapina</div>
-          <div class="therapy-item">Antiepilettici: gabapentin, pregabalin</div>
+          <div class="therapy-item">Farmaci per dolore neuropatico: gabapentin, pregabalin</div>
         </div>`
     }
   },
@@ -1348,7 +1350,7 @@ const DIAGNOSES = {
       "Criteri": `
         <div class="tab-section-title">Almeno 1 dei 2 (≥3 gg/sett, ≥2 mesi)</div>
         <div class="info-list">
-          <div class="info-item"><div class="info-item-dot dot-blue"></div>Pienezza postprandiale fastidiosa che si verifica con il completamento di un pasto adeguato all'età (<strong>entro 2 ore</strong>)</div>
+          <div class="info-item"><div class="info-item-dot dot-blue"></div>Pienezza postprandiale fastidiosa che si verifica con il completamento di un pasto adeguato all'età (entro 2 ore)</div>
           <div class="info-item"><div class="info-item-dot dot-blue"></div>Sazietà precoce che impedisce di completare un pasto adeguato all'età</div>
         </div>`,
       "Esami": `
@@ -1359,7 +1361,9 @@ const DIAGNOSES = {
         </div>`,
       "Terapia": `
         <div class="therapy-block">
-          <div class="therapy-item">Spiegare la natura biopsicosociale; discutere trigger; gut-brain axis</div>
+          <div class="therapy-label">Indicazioni;</div>
+          <div class="therapy-item">Spiegare la natura biopsicosociale; discutere i fattori scatenanti;</div>
+          <div class="therapy-item">Presa in carico presso Gastroneterologo Pediatrico;</div>
           <div class="therapy-item">Procinetici (prucalopride, domperidone) se svuotamento gastrico anomalo</div>
           <div class="therapy-item">Mirtazapina: 76% miglioramento; 45% risoluzione completa</div>
           <div class="therapy-item">Ciproeptadina: efficace per FD</div>
@@ -1386,12 +1390,12 @@ const DIAGNOSES = {
         <div style="display:flex;flex-direction:column;gap:6px">
           <div class="exam-item required">EGD: NON di routine — indicata in casi selezionati</div>
           <div class="exam-item required">H. pylori: NON richiede testing di routine</div>
-          <div class="exam-item">Ecografia/HIDA scan: riservata a dolore QSD</div>
+          <div class="exam-item">Ecografia/HIDA scan: riservata a dolore quadrante superiore destro</div>
         </div>`,
       "Terapia": `
         <div class="therapy-block">
-          <div class="therapy-item">Soppressione acida (corso limitato) per sintomi di tipo EPS</div>
-          <div class="therapy-item">TCA a basse dosi se refrattario</div>
+          <div class="therapy-item">Soppressione acida con inibitori di pompa protonico (ruolo limitato) per sintomi di tipo EPS</div>
+          <div class="therapy-item">antidepressivi triciclici a basse dosi se refrattario (indicazione specialistica)</div>
           <div class="therapy-item">Ipnoterapia · PENFS</div>
         </div>`
     }
@@ -1501,8 +1505,62 @@ const DIAGNOSES = {
           <div class="therapy-item">TCA (amitriptilina) come terapia di mantenimento</div>
         </div>`
     }
-  }
-
+  },
+  GERD:{
+    title:"Malattia da Reflusso Gastroesofageo",code:"Patologia Organica · NASPGHAN-ESPGHAN & SIP-SIGENP",
+    summary:"Il reflusso (GER) è fisiologico; nel lattante il rigurgito è comune e si risolve entro 12-14 mesi. Si parla di malattia (GERD) solo quando il reflusso causa sintomi fastidiosi o complicanze. Da distinguere dai disturbi esofagei funzionali (RH/RNEPD), che hanno esposizione acida normale.",
+    tabs:{
+      "Criteri":`<div class="hbox warn" style="background:#fff6ee;border-color:#f0c9a6;color:#c2600f;margin-top:0">⚠ Patologia organica, non un DGBI. Il reflusso fisiologico va distinto dalla malattia.</div>
+        <div class="tsec" style="margin-top:12px">Definizione e diagnosi</div><div class="ilist">
+        <div class="iitem"><div class="idot db"></div>Sintomi fastidiosi e/o complicanze (esofagee o extra-esofagee) dovuti al reflusso di contenuto gastrico in esofago</div>
+        <div class="iitem"><div class="idot db"></div><strong>Neonati/lattanti/bambini piccoli:</strong> diagnosi SOLO se esofagite da reflusso all'endoscopia/biopsia O pH-MII patologica</div>
+        <div class="iitem"><div class="idot db"></div><strong>Bambini grandi/adolescenti:</strong> pirosi, dolore epigastrico e rigurgito che si risolvono con terapia antireflusso</div>
+      </div>
+      <div class="tsec" style="margin-top:12px">Presentazioni</div><div class="ilist">
+        <div class="iitem"><div class="idot dg" style="background:var(--muted)"></div>Lattante: rigurgito/vomito, irritabilità, difficoltà di alimentazione</div>
+        <div class="iitem"><div class="idot dg" style="background:var(--muted)"></div>Extra-esofagee: tosse cronica, raucedine, laringite (se con pirosi/dolore epigastrico)</div>
+        <div class="iitem"><div class="idot dg" style="background:var(--muted)"></div>Sindrome di Sandifer: torcicollo episodico con estensione/rotazione del collo</div>
+      </div>
+      <div class="hbox info">ℹ Fenotipi a pH-MII: GERD acido/non-acido, NERD, esofago ipersensibile (= RH). Escludere sempre l'esofagite eosinofila (EoE) con biopsie.</div>`,
+      "Allarmi":`<div class="tsec">Red flag</div><div class="ilist">
+        <div class="iitem"><div class="idot dr"></div>Scarso accrescimento / arresto di crescita</div>
+        <div class="iitem"><div class="idot dr"></div>Ematemesi, disfagia, odinofagia</div>
+        <div class="iitem"><div class="idot dr"></div>Difficoltà di alimentazione, distress persistente</div>
+        <div class="iitem"><div class="idot dr"></div>Sintomi persistenti oltre i 12-18 mesi o a esordio tardivo</div>
+        <div class="iitem"><div class="idot dr"></div>Vomito biliare o proiettile, sintomi notturni</div>
+      </div>
+      <div class="tsec" style="margin-top:12px">Categorie ad alto rischio</div><div class="ilist">
+        <div class="iitem"><div class="idot dr"></div>Compromissione neurologica, disturbi neuromotori</div>
+        <div class="iitem"><div class="idot dr"></div>Malformazioni gastroesofagee (es. atresia esofagea), fibrosi cistica</div>
+        <div class="iitem"><div class="idot dr"></div>Prematurità, obesità</div>
+        <div class="iitem"><div class="idot dr"></div>Sindromi (Down, Rett, Cornelia de Lange, CHARGE, VACTERL, ASD)</div>
+      </div>`,
+      "Esami":`<div class="tsec">Esami indicati</div>
+        <div class="exam-item">Trial empirico PPI 4-8 settimane: approccio iniziale nei bambini grandi/adolescenti con pirosi tipica; test se non responsivi</div>
+        <div class="exam-item req">Endoscopia + biopsie esofagee: per valutare complicanze o malattia mucosale e prima di escalation terapeutica (conferma/esclude esofagite ed EoE)</div>
+        <div class="exam-item req">pH-impedenza (pH-MII): sintomi persistenti inspiegati, per caratterizzare reflusso e fenotipi</div>
+        <div class="exam-item">Bario ed ecografia: solo per escludere anomalie anatomiche · Manometria: solo se sospetto disturbo della motilità</div>
+        <div class="hbox danger">✗ NON usare per la diagnosi: pasto baritato, ecografia, EGDS di per sé, manometria, scintigrafia, pepsina salivare, biomarcatori extraesofagei, sonda transpilorica/digiunale. NON il trial di PPI come test diagnostico nel lattante né nei sintomi extraesofagei.</div>`,
+      "Terapia":`<div class="tblock"><div class="tlabel">Misure conservative (prima linea, lattante)</div>
+        <div class="titem">Sostenere l'allattamento al seno; rassicurazione ed educazione dei genitori</div>
+        <div class="titem">Valutare/correggere l'ipernutrizione (overfeeding)</div>
+        <div class="titem">Formule ispessite nel lattante a termine con rigurgiti persistenti</div>
+        <div class="titem">Formula estensivamente idrolizzata se si sospetta APLV</div>
+        <div class="titem" style="color:var(--red)">Alginati: NON prima scelta nel trattamento cronico</div>
+        <div class="titem">Misure posturali nei più grandi; NON di routine nel lattante che dorme</div></div>
+        <div class="tblock"><div class="tlabel">Farmacologico</div>
+        <div class="titem">PPI: prima linea nell'esofagite da reflusso; trial 4-8 sett negli adolescenti; rivalutare e deprescrivere</div>
+        <div class="titem">H2RA: alternativa ai PPI (se non disponibili o controindicati)</div>
+        <div class="titem">NON i PPI per pianto/distress o rigurgito del lattante, né empirici per sintomi extra-esofagei isolati</div></div>
+        <div class="hbox danger">✗ NON raccomandati: procinetici (metoclopramide, domperidone, eritromicina, betanecolo); antiacidi/alginati per il trattamento cronico; massoterapia, probiotici/prebiotici e fitoterapici per il GERD</div>
+        <div class="tblock" style="margin-top:10px"><div class="tlabel">GERD refrattario (dopo terapia ottimale)</div>
+        <div class="titem">Baclofen: da considerare prima della chirurgia quando gli altri trattamenti falliscono</div>
+        <div class="titem">Alimentazione transpilorica/digiunale: alternativa alla fundoplicatio</div>
+        <div class="titem">Fundoplicatio: solo con evidenza oggettiva e indicazioni specifiche, in decisione condivisa; non di routine</div>
+        <div class="titem">Disconnessione esofagogastrica totale: NON di prima linea, solo come rescue (compromissione neurologica + fundoplicatio fallita)</div>
+        <div class="titem">Ablazione a radiofrequenza: NON raccomandata</div></div>`
+    }
+  },
 
 
 
@@ -1647,7 +1705,7 @@ const NODES = {
     answers: [
       { label: "Endoscopia normale + esposizione acida normale + correlazione POSITIVA sintomi-reflusso", next: "DIAG:RH" },
       { label: "Endoscopia normale + esposizione acida normale + correlazione NEGATIVA (nessuna correlazione)", next: "DIAG:RNEPD" },
-      { label: "Esposizione acida PATOLOGICA o endoscopia anomala", next: "STOP_ORGANIC" }
+      { label: "Esposizione acida PATOLOGICA o endoscopia anomala", next: "DIAG:GERD" },
     ]
   },
   A9: {
